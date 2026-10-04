@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { site } from "@/lib/site";
 
-const LAST_UPDATED = "2024-09-01";
+const LAST_UPDATED = "2026-10-04";
 
 export const metadata: Metadata = {
   title: "プライバシーポリシー",

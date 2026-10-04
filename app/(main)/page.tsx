@@ -5,10 +5,10 @@ import { articles } from "@/content/articles";
 import ArticleCard from "@/components/ArticleCard";
 
 export const metadata: Metadata = {
-  title: site.name,
+  title: { absolute: `${site.name} | ${site.description}` },
   description: site.description,
   openGraph: {
-    title: site.name,
+    title: `${site.name} | ${site.description}`,
     description: site.description,
     url: `${site.url}/`,
   },
