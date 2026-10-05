@@ -6,8 +6,7 @@ import { lpItems } from "@/content/lp";
 
 const article = getArticle("plan")!;
 
-const photoStudioLp = lpItems.find((l) => l.slug === "photo-studio");
-const LP_SLUG: string | null = photoStudioLp?.affiliateUrl ? "photo-studio" : null;
+const publishedLps = lpItems.filter((l) => l.affiliateUrl !== "" && l.articleLinkLabel);
 
 export const metadata: Metadata = {
   title: article.title,
@@ -237,18 +236,24 @@ export default function PlanPage() {
 
         </div>
 
-        {/* LP導線プレースホルダー（LP_SLUGが設定されたときだけ表示） */}
-        {LP_SLUG && (
-          <div className="mt-10 p-6 border border-zinc-200 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-900 text-center">
+        {/* LP導線（公開中のLPだけを地域ラベルで並べる） */}
+        {publishedLps.length > 0 && (
+          <div className="mt-10 p-6 border border-zinc-200 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-900">
             <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4">
               フォトスタジオの予約はこちらから確認できます。
             </p>
-            <Link
-              href={`/lp/${LP_SLUG}/`}
-              className="text-sm text-slate-700 dark:text-slate-300 underline"
-            >
-              詳しく見る
-            </Link>
+            <ul className="space-y-2">
+              {publishedLps.map((lp) => (
+                <li key={lp.slug}>
+                  <Link
+                    href={`/lp/${lp.slug}/`}
+                    className="text-sm text-slate-700 dark:text-slate-300 underline"
+                  >
+                    {lp.articleLinkLabel}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         )}
 

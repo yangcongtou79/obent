@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { lpItems, type LpBodyBlock } from "@/content/lp";
+import { lpItems, type LpBodyBlock, type LpMenuMapRow } from "@/content/lp";
 import { site } from "@/lib/site";
 import PrLabel from "@/components/PrLabel";
 import MetaPixel from "@/components/MetaPixel";
@@ -65,6 +65,99 @@ function formatInfoDate(iso: string) {
   return `${parts[0]}年${parts[1]}月${parts[2]}日`;
 }
 
+function MenuMapSvg({ rows }: { rows: LpMenuMapRow[] }) {
+  const GAP = 14;
+  const BASE_H = 54;
+  const EXTRA_H = 12;
+  const LEFT_X = 4;
+  const LEFT_W = 182;
+  const ARROW_X = 193;
+  const RIGHT_X = 202;
+  const RIGHT_W = 188;
+  const FONT = 12;
+  const LINE_H = 17;
+
+  let y = GAP;
+  const rowPositions = rows.map((row) => {
+    const wantLines = row.want.split("\n");
+    const menuLines = row.menu.split("\n");
+    const maxLines = Math.max(wantLines.length, menuLines.length);
+    const h = maxLines > 1 ? BASE_H + EXTRA_H : BASE_H;
+    const pos = { y, h, wantLines, menuLines };
+    y += h + GAP;
+    return pos;
+  });
+  const totalH = y;
+  const totalW = RIGHT_X + RIGHT_W + 6;
+
+  return (
+    <svg
+      viewBox={`0 0 ${totalW} ${totalH}`}
+      className="w-full max-w-[400px] mx-auto block"
+      role="img"
+      aria-label="こうしたいと選ぶメニューの対応"
+    >
+      {rowPositions.map((pos, i) => {
+        const mid = pos.y + pos.h / 2;
+        const wantStartY =
+          pos.wantLines.length === 1
+            ? mid
+            : mid - (LINE_H * (pos.wantLines.length - 1)) / 2;
+        const menuStartY =
+          pos.menuLines.length === 1
+            ? mid
+            : mid - (LINE_H * (pos.menuLines.length - 1)) / 2;
+
+        return (
+          <g key={i}>
+            <rect
+              x={LEFT_X} y={pos.y} width={LEFT_W} height={pos.h} rx="4"
+              fill="none" stroke="currentColor" strokeWidth="1.2" opacity="0.4"
+            />
+            {pos.wantLines.map((line, li) => (
+              <text
+                key={li}
+                x={LEFT_X + LEFT_W / 2}
+                y={wantStartY + li * LINE_H}
+                textAnchor="middle"
+                fontSize={FONT}
+                fill="currentColor"
+                dominantBaseline="central"
+              >
+                {line}
+              </text>
+            ))}
+            <text
+              x={ARROW_X} y={mid}
+              textAnchor="middle" fontSize="18" fill="currentColor" opacity="0.45"
+              dominantBaseline="central"
+            >
+              →
+            </text>
+            <rect
+              x={RIGHT_X} y={pos.y} width={RIGHT_W} height={pos.h} rx="4"
+              fill="none" stroke="#f59e0b" strokeWidth="1.5"
+            />
+            {pos.menuLines.map((line, li) => (
+              <text
+                key={li}
+                x={RIGHT_X + RIGHT_W / 2}
+                y={menuStartY + li * LINE_H}
+                textAnchor="middle"
+                fontSize={FONT}
+                fill="currentColor"
+                dominantBaseline="central"
+              >
+                {line}
+              </text>
+            ))}
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
 export default async function LpPage({
   params,
 }: {
@@ -126,8 +219,50 @@ export default async function LpPage({
                 </p>
               )}
 
-              {hasTableOptions ? (
-                /* 表レイアウト（when フィールドがある場合） */
+              {/* 選び方の図（menuMap がある場合） */}
+              {item.menuMap && item.menuMap.length > 0 && (
+                <div className="my-5 py-4 px-2 bg-white dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-700">
+                  <MenuMapSvg rows={item.menuMap} />
+                </div>
+              )}
+
+              {item.optionsAsTable ? (
+                /* 2列表レイアウト（メニュー名＋内容） */
+                <div className="table-scroll">
+                  <table className="w-full text-sm border-collapse border border-zinc-200 dark:border-zinc-700">
+                    <thead>
+                      <tr className="bg-zinc-100 dark:bg-zinc-800">
+                        <th className="text-left p-3 border border-zinc-200 dark:border-zinc-700 font-semibold text-zinc-700 dark:text-zinc-300 whitespace-nowrap">
+                          メニュー
+                        </th>
+                        <th className="text-left p-3 border border-zinc-200 dark:border-zinc-700 font-semibold text-zinc-700 dark:text-zinc-300">
+                          内容
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {item.options.map((opt, i) => (
+                        <tr
+                          key={i}
+                          className={
+                            i % 2 === 0
+                              ? "bg-white dark:bg-zinc-900"
+                              : "bg-stone-50 dark:bg-zinc-800"
+                          }
+                        >
+                          <td className="p-3 border border-zinc-200 dark:border-zinc-700 font-medium text-zinc-800 dark:text-zinc-100 align-top whitespace-nowrap">
+                            {opt.title}
+                          </td>
+                          <td className="p-3 border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 align-top">
+                            {opt.description}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ) : hasTableOptions ? (
+                /* 3列表レイアウト（when フィールドがある場合） */
                 <div className="table-scroll">
                   <table className="w-full text-sm border-collapse border border-zinc-200 dark:border-zinc-700">
                     <thead>
@@ -184,6 +319,13 @@ export default async function LpPage({
                     </div>
                   ))}
                 </div>
+              )}
+
+              {/* 選択肢セクション末尾の注記 */}
+              {item.optionsNote && (
+                <p className="mt-4 text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                  {item.optionsNote}
+                </p>
               )}
             </section>
           )}
@@ -288,6 +430,12 @@ export default async function LpPage({
                   </li>
                 ))}
               </ol>
+              {/* 予約の流れセクション末尾の注記 */}
+              {item.stepsNote && (
+                <p className="mt-5 text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed border-t border-zinc-100 dark:border-zinc-800 pt-4">
+                  {item.stepsNote}
+                </p>
+              )}
             </section>
           )}
 
