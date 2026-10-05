@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { site } from "@/lib/site";
 import { getArticle } from "@/content/articles";
+import { lpItems } from "@/content/lp";
 
 const article = getArticle("plan")!;
 
-// Set this to the LP slug when an affiliate link is approved
-const LP_SLUG: string | null = null;
+const photoStudioLp = lpItems.find((l) => l.slug === "photo-studio");
+const LP_SLUG: string | null = photoStudioLp?.affiliateUrl ? "photo-studio" : null;
 
 export const metadata: Metadata = {
   title: article.title,
