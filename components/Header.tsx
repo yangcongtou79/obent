@@ -3,11 +3,12 @@ import { site } from "@/lib/site";
 
 export default function Header() {
   return (
-    <header className="border-b border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900">
+    <header style={{ borderBottom: "1px solid var(--border)", backgroundColor: "var(--bg-surface)" }}>
       <div className="max-w-3xl mx-auto px-4 h-14 flex items-center justify-between">
         <Link
           href="/"
-          className="text-lg font-bold tracking-tight text-zinc-800 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-300"
+          className="text-lg font-bold tracking-tight"
+          style={{ color: "var(--text-on)" }}
         >
           {site.name}
         </Link>
@@ -16,7 +17,8 @@ export default function Header() {
             <li>
               <Link
                 href="/kosodate/"
-                className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100"
+                className="hover:underline"
+                style={{ color: "var(--text-dim)" }}
               >
                 子育て
               </Link>
@@ -24,7 +26,8 @@ export default function Header() {
             <li>
               <Link
                 href="/about/"
-                className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100"
+                className="hover:underline"
+                style={{ color: "var(--text-dim)" }}
               >
                 運営者情報
               </Link>

@@ -17,41 +17,35 @@ export const metadata: Metadata = {
 export default function KosodatePage() {
   return (
     <div className="max-w-3xl mx-auto px-4 py-10">
-      <nav aria-label="パンくずリスト" className="text-sm text-zinc-500 dark:text-zinc-400 mb-8">
+      <nav aria-label="パンくずリスト" className="text-sm mb-8" style={{ color: "var(--text-dim)" }}>
         <ol className="flex flex-wrap gap-1 items-center">
           <li><Link href="/" className="hover:underline">ホーム</Link></li>
           <li aria-hidden="true">/</li>
-          <li className="text-zinc-800 dark:text-zinc-200">子育て</li>
+          <li style={{ color: "var(--text-on)" }}>子育て</li>
         </ol>
       </nav>
 
-      <h1 className="text-2xl font-bold text-zinc-800 dark:text-zinc-100 mb-4">
+      <h1 className="text-2xl font-bold mb-4" style={{ color: "var(--text-on)", letterSpacing: "0.02em" }}>
         子育て
       </h1>
-      <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-10 max-w-prose">
+      <p className="leading-relaxed mb-10 max-w-prose" style={{ color: "var(--text-dim)" }}>
         子育てには、節目ごとに準備や判断が必要な場面があります。記念写真の撮影や、子どもの英語学習など、実際に動く前に知っておきたい情報を、テーマごとに整理しています。
       </p>
 
       <section>
-        <h2 className="text-lg font-semibold text-zinc-700 dark:text-zinc-300 mb-4 pb-2 border-b border-zinc-200 dark:border-zinc-700">
+        <h2 className="text-lg font-semibold mb-4" style={{ color: "var(--text-on)" }}>
           テーマ一覧
         </h2>
         <div className="space-y-3">
-          <Link
-            href="/kosodate/photo/"
-            className="block p-5 border border-zinc-200 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-900 hover:bg-stone-50 dark:hover:bg-zinc-800 transition-colors"
-          >
-            <span className="font-semibold text-zinc-800 dark:text-zinc-100">記念写真</span>
-            <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+          <Link href="/kosodate/photo/" className="link-card">
+            <span className="font-semibold" style={{ color: "var(--text-on)" }}>記念写真</span>
+            <p className="mt-1 text-sm" style={{ color: "var(--text-dim)" }}>
               フォトスタジオの選び方から料金の仕組み、撮影当日の流れまで
             </p>
           </Link>
-          <Link
-            href="/kosodate/english/"
-            className="block p-5 border border-zinc-200 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-900 hover:bg-stone-50 dark:hover:bg-zinc-800 transition-colors"
-          >
-            <span className="font-semibold text-zinc-800 dark:text-zinc-100">子どもの英語</span>
-            <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+          <Link href="/kosodate/english/" className="link-card">
+            <span className="font-semibold" style={{ color: "var(--text-on)" }}>子どもの英語</span>
+            <p className="mt-1 text-sm" style={{ color: "var(--text-dim)" }}>
               小学校での学習内容や、教室・オンラインの選び方など
             </p>
           </Link>

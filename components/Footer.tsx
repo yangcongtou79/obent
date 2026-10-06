@@ -3,26 +3,26 @@ import { site } from "@/lib/site";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 mt-16">
+    <footer className="mt-16" style={{ borderTop: "1px solid var(--border)", backgroundColor: "var(--bg-surface)" }}>
       <div className="max-w-3xl mx-auto px-4 py-8">
-        <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-4">
+        <p className="text-xs mb-4" style={{ color: "var(--text-dim)" }}>
           当サイトは広告を利用しています。
         </p>
         <nav aria-label="フッターナビゲーション">
-          <ul className="flex flex-wrap gap-4 text-sm text-zinc-500 dark:text-zinc-400">
+          <ul className="flex flex-wrap gap-4 text-sm" style={{ color: "var(--text-dim)" }}>
             <li>
-              <Link href="/about/" className="hover:text-zinc-800 dark:hover:text-zinc-200">
+              <Link href="/about/" className="hover:underline">
                 運営者情報
               </Link>
             </li>
             <li>
-              <Link href="/privacy/" className="hover:text-zinc-800 dark:hover:text-zinc-200">
+              <Link href="/privacy/" className="hover:underline">
                 プライバシーポリシー
               </Link>
             </li>
           </ul>
         </nav>
-        <p className="mt-6 text-xs text-zinc-400 dark:text-zinc-600">
+        <p className="mt-6 text-xs" style={{ color: "var(--text-dim)", opacity: 0.55 }}>
           &copy; {new Date().getFullYear()} {site.owner}
         </p>
       </div>

@@ -32,26 +32,26 @@ export default function PhotoPage() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-10">
-      <nav aria-label="パンくずリスト" className="text-sm text-zinc-500 dark:text-zinc-400 mb-8">
+      <nav aria-label="パンくずリスト" className="text-sm mb-8" style={{ color: "var(--text-dim)" }}>
         <ol className="flex flex-wrap gap-1 items-center">
           <li><Link href="/" className="hover:underline">ホーム</Link></li>
           <li aria-hidden="true">/</li>
           <li><Link href="/kosodate/" className="hover:underline">子育て</Link></li>
           <li aria-hidden="true">/</li>
-          <li className="text-zinc-800 dark:text-zinc-200">記念写真</li>
+          <li style={{ color: "var(--text-on)" }}>記念写真</li>
         </ol>
       </nav>
 
-      <h1 className="text-2xl font-bold text-zinc-800 dark:text-zinc-100 mb-4">
+      <h1 className="text-2xl font-bold mb-4" style={{ color: "var(--text-on)", letterSpacing: "0.02em" }}>
         記念写真
       </h1>
-      <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-10 max-w-prose">
+      <p className="leading-relaxed mb-10 max-w-prose" style={{ color: "var(--text-dim)" }}>
         フォトスタジオでの記念写真は、プランの選択から始まり、予約・撮影・写真の受け取りという流れで進みます。スタジオごとに料金の仕組みや予約方法が異なるため、事前に確認しておくことが大切です。
       </p>
 
       {/* Flow diagram */}
       <section className="mb-12">
-        <h2 className="text-lg font-semibold text-zinc-700 dark:text-zinc-300 mb-5">
+        <h2 className="text-lg font-semibold mb-5" style={{ color: "var(--text-on)" }}>
           撮影の基本的な流れ
         </h2>
         <div className="overflow-x-auto -mx-4 px-4">
@@ -59,20 +59,22 @@ export default function PhotoPage() {
             {flowSteps.map((step, i) => (
               <div key={i} className="flex items-center">
                 <div className="flex flex-col items-center w-32">
-                  {/* Node */}
-                  <div className="w-28 px-2 py-3 rounded bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-600 text-center">
-                    <span className="text-xs font-semibold text-zinc-800 dark:text-zinc-100 leading-tight">
+                  <div
+                    className="w-28 px-2 py-3 text-center"
+                    style={{ backgroundColor: "var(--bg-surface)", border: "1px solid var(--border)" }}
+                  >
+                    <span className="text-xs font-semibold leading-tight" style={{ color: "var(--text-on)" }}>
                       {step.label}
                     </span>
                   </div>
-                  <p className="mt-2 text-xs text-zinc-500 dark:text-zinc-400 text-center leading-snug px-1">
+                  <p className="mt-2 text-xs text-center leading-snug px-1" style={{ color: "var(--text-dim)" }}>
                     {step.note}
                   </p>
                 </div>
-                {/* Arrow */}
                 {i < flowSteps.length - 1 && (
                   <svg
-                    className="flex-shrink-0 w-6 h-6 text-zinc-400 dark:text-zinc-600 -mt-6"
+                    className="flex-shrink-0 w-6 h-6 -mt-6"
+                    style={{ color: "var(--text-dim)" }}
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -92,7 +94,7 @@ export default function PhotoPage() {
 
       {/* Articles */}
       <section>
-        <h2 className="text-lg font-semibold text-zinc-700 dark:text-zinc-300 mb-4 pb-2 border-b border-zinc-200 dark:border-zinc-700">
+        <h2 className="text-lg font-semibold mb-4" style={{ color: "var(--text-on)" }}>
           記事一覧
         </h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

@@ -11,17 +11,18 @@ function buildArticleUrl(article: Article): string {
 
 export default function ArticleCard({ article }: ArticleCardProps) {
   return (
-    <article className="border border-zinc-200 dark:border-zinc-700 rounded-lg overflow-hidden bg-white dark:bg-zinc-900">
-      <Link href={buildArticleUrl(article)} className="block p-5 hover:bg-stone-50 dark:hover:bg-zinc-800 transition-colors">
-        <h3 className="text-base font-semibold text-zinc-800 dark:text-zinc-100 leading-snug mb-2">
+    <article className="article-card">
+      <Link href={buildArticleUrl(article)} className="block p-5">
+        <h3 className="text-base font-semibold leading-snug mb-2" style={{ color: "var(--text-on)" }}>
           {article.title}
         </h3>
-        <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+        <p className="text-sm leading-relaxed" style={{ color: "var(--text-dim)" }}>
           {article.description}
         </p>
         <time
           dateTime={article.publishedAt}
-          className="block mt-3 text-xs text-zinc-400 dark:text-zinc-500"
+          className="block mt-3 text-xs"
+          style={{ color: "var(--text-dim)", opacity: 0.7 }}
         >
           {article.publishedAt.replace(/-/g, "/")}
         </time>

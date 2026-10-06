@@ -101,8 +101,8 @@ export default function PlanPage() {
         </header>
 
         {/* Summary */}
-        <div className="mb-8 p-4 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-lg">
-          <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300 mb-3">この記事のポイント</p>
+        <div className="summary-box">
+          <p className="text-sm font-semibold mb-3" style={{ color: "var(--text-on)" }}>この記事のポイント</p>
           <ul className="space-y-1.5 text-sm text-zinc-600 dark:text-zinc-400">
             <li className="flex gap-2"><span className="flex-shrink-0">·</span><span>スタジオの予約フォームには複数のメニューが並んでいることが多い</span></li>
             <li className="flex gap-2"><span className="flex-shrink-0">·</span><span>代表的なプランは「撮影のみ」「衣装レンタル付き」「持ち込み衣装」「参拝セット」の4つ</span></li>
@@ -140,7 +140,8 @@ export default function PlanPage() {
               {planTypes.map((plan) => (
                 <div
                   key={plan.id}
-                  className="p-5 border border-zinc-200 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-900"
+                  className="p-5"
+                  style={{ backgroundColor: "var(--bg-surface)", borderTop: "1px solid var(--border)", borderRight: "1px solid var(--border)", borderBottom: "1px solid var(--border)", borderLeft: "3px solid var(--border)" }}
                 >
                   <h3 className="text-base font-semibold text-zinc-800 dark:text-zinc-100 mb-2">
                     {plan.title}
@@ -155,7 +156,7 @@ export default function PlanPage() {
                     ))}
                   </ul>
                   {plan.notes && (
-                    <p className="mt-3 text-xs text-zinc-400 dark:text-zinc-500 border-t border-zinc-100 dark:border-zinc-700 pt-2">
+                    <p className="mt-3 text-xs pt-2" style={{ color: "var(--text-dim)", opacity: 0.7, borderTop: "1px solid var(--border)" }}>
                       ※ {plan.notes}
                     </p>
                   )}
@@ -240,8 +241,8 @@ export default function PlanPage() {
 
         {/* LP導線（公開中のLPだけを地域ラベルで並べる） */}
         {publishedLps.length > 0 && (
-          <div className="mt-10 p-6 border border-zinc-200 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-900">
-            <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4">
+          <div className="mt-10 p-6" style={{ backgroundColor: "var(--bg-surface)", border: "1px solid var(--border)", borderLeft: "3px solid var(--accent)" }}>
+            <p className="text-sm mb-4" style={{ color: "var(--text-dim)" }}>
               フォトスタジオの予約はこちらから確認できます。
             </p>
             <ul className="space-y-2">
@@ -259,8 +260,8 @@ export default function PlanPage() {
           </div>
         )}
 
-        <div className="mt-10 pt-6 border-t border-zinc-200 dark:border-zinc-700">
-          <Link href="/kosodate/photo/" className="text-sm text-zinc-500 dark:text-zinc-400 hover:underline">
+        <div className="mt-10 pt-6" style={{ borderTop: "1px solid var(--border)" }}>
+          <Link href="/kosodate/photo/" className="text-sm hover:underline" style={{ color: "var(--text-dim)" }}>
             ← 記念写真トップへ戻る
           </Link>
         </div>

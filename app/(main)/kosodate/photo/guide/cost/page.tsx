@@ -83,8 +83,8 @@ export default function CostPage() {
         </header>
 
         {/* Summary */}
-        <div className="mb-8 p-4 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-lg">
-          <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300 mb-3">この記事のポイント</p>
+        <div className="summary-box">
+          <p className="text-sm font-semibold mb-3" style={{ color: "var(--text-on)" }}>この記事のポイント</p>
           <ul className="space-y-1.5 text-sm text-zinc-600 dark:text-zinc-400">
             <li className="flex gap-2"><span className="flex-shrink-0">·</span><span>スタジオの料金は撮影料・衣装・着付け・ヘアセット・写真商品に分かれている</span></li>
             <li className="flex gap-2"><span className="flex-shrink-0">·</span><span>「撮影料無料」でも写真の購入が別途必要になる場合がある</span></li>
@@ -211,8 +211,8 @@ export default function CostPage() {
 
         </div>
 
-        <div className="mt-10 pt-6 border-t border-zinc-200 dark:border-zinc-700">
-          <Link href="/kosodate/photo/" className="text-sm text-zinc-500 dark:text-zinc-400 hover:underline">
+        <div className="mt-10 pt-6" style={{ borderTop: "1px solid var(--border)" }}>
+          <Link href="/kosodate/photo/" className="text-sm hover:underline" style={{ color: "var(--text-dim)" }}>
             ← 記念写真トップへ戻る
           </Link>
         </div>

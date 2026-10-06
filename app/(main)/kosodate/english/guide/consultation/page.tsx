@@ -54,8 +54,8 @@ export default function ConsultationPage() {
         </header>
 
         {/* Summary */}
-        <div className="mb-8 p-4 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-lg">
-          <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300 mb-3">この記事のポイント</p>
+        <div className="summary-box">
+          <p className="text-sm font-semibold mb-3" style={{ color: "var(--text-on)" }}>この記事のポイント</p>
           <ul className="space-y-1.5 text-sm text-zinc-600 dark:text-zinc-400">
             <li className="flex gap-2"><span className="flex-shrink-0">·</span><span>無料相談や体験では、レベルの確認、進め方の説明、料金の案内などができる（内容はサービスによる）</span></li>
             <li className="flex gap-2"><span className="flex-shrink-0">·</span><span>確認したい項目をリストアップしておくと、当日の相談がスムーズに進む</span></li>
@@ -184,8 +184,8 @@ export default function ConsultationPage() {
 
         {/* LP導線（公開中の英語LPだけを表示） */}
         {publishedLps.length > 0 && (
-          <div className="mt-10 p-6 border border-zinc-200 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-900">
-            <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4">
+          <div className="mt-10 p-6" style={{ backgroundColor: "var(--bg-surface)", border: "1px solid var(--border)", borderLeft: "3px solid var(--accent)" }}>
+            <p className="text-sm mb-4" style={{ color: "var(--text-dim)" }}>
               オンライン英会話の予約はこちらから確認できます。
             </p>
             <ul className="space-y-2">
@@ -203,8 +203,8 @@ export default function ConsultationPage() {
           </div>
         )}
 
-        <div className="mt-10 pt-6 border-t border-zinc-200 dark:border-zinc-700">
-          <Link href="/kosodate/english/" className="text-sm text-zinc-500 dark:text-zinc-400 hover:underline">
+        <div className="mt-10 pt-6" style={{ borderTop: "1px solid var(--border)" }}>
+          <Link href="/kosodate/english/" className="text-sm hover:underline" style={{ color: "var(--text-dim)" }}>
             ← 子どもの英語トップへ戻る
           </Link>
         </div>

@@ -42,7 +42,8 @@ function BodyBlock({ block, index }: { block: LpBodyBlock; index: number }) {
     return (
       <ul
         key={index}
-        className="list-disc list-inside space-y-1 text-sm text-zinc-600 dark:text-zinc-400"
+        className="list-disc list-inside space-y-1 text-sm"
+        style={{ color: "var(--text-dim)" }}
       >
         {block.items.map((item, j) => (
           <li key={j}>{item}</li>
@@ -53,7 +54,8 @@ function BodyBlock({ block, index }: { block: LpBodyBlock; index: number }) {
   return (
     <p
       key={index}
-      className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed"
+      className="text-sm leading-relaxed"
+      style={{ color: "var(--text-dim)" }}
     >
       {block.text}
     </p>
@@ -111,8 +113,8 @@ function MenuMapSvg({ rows }: { rows: LpMenuMapRow[] }) {
         return (
           <g key={i}>
             <rect
-              x={LEFT_X} y={pos.y} width={LEFT_W} height={pos.h} rx="4"
-              fill="none" stroke="currentColor" strokeWidth="1.2" opacity="0.4"
+              x={LEFT_X} y={pos.y} width={LEFT_W} height={pos.h} rx="2"
+              fill="none" stroke="currentColor" strokeWidth="1.2" opacity="0.35"
             />
             {pos.wantLines.map((line, li) => (
               <text
@@ -129,14 +131,14 @@ function MenuMapSvg({ rows }: { rows: LpMenuMapRow[] }) {
             ))}
             <text
               x={ARROW_X} y={mid}
-              textAnchor="middle" fontSize="18" fill="currentColor" opacity="0.45"
+              textAnchor="middle" fontSize="18" fill="currentColor" opacity="0.4"
               dominantBaseline="central"
             >
               →
             </text>
             <rect
-              x={RIGHT_X} y={pos.y} width={RIGHT_W} height={pos.h} rx="4"
-              fill="none" stroke="#f59e0b" strokeWidth="1.5"
+              x={RIGHT_X} y={pos.y} width={RIGHT_W} height={pos.h} rx="2"
+              fill="none" stroke="var(--accent)" strokeWidth="1.5"
             />
             {pos.menuLines.map((line, li) => (
               <text
@@ -172,7 +174,6 @@ export default async function LpPage({
   return (
     <>
       <MetaPixel />
-      {/* A8.net 計測用画像（設定されている場合のみ出力） */}
       {item.measurementImageUrl && (
         // eslint-disable-next-line @next/next/no-img-element
         <img
@@ -185,21 +186,24 @@ export default async function LpPage({
         />
       )}
 
-      <div className="min-h-screen bg-stone-50 dark:bg-zinc-950">
-        {/* Header: PR表記はスクロールなしで見える位置に固定 */}
-        <header className="px-4 py-3 border-b border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900">
+      <div className="min-h-screen" style={{ backgroundColor: "var(--bg-base)" }}>
+        {/* Header */}
+        <header
+          className="px-4 py-3"
+          style={{ borderBottom: "1px solid var(--border)", backgroundColor: "var(--bg-surface)" }}
+        >
           <div className="max-w-2xl mx-auto">
             <PrLabel />
           </div>
         </header>
 
         <main className="max-w-2xl mx-auto px-4">
-          {/* ファーストビュー: 見出し + 導入 + CTA 1 */}
+          {/* ファーストビュー */}
           <section className="pt-6 pb-7">
-            <h1 className="text-xl font-bold text-zinc-800 dark:text-zinc-100 mb-3 leading-snug">
+            <h1 className="text-xl font-bold mb-3 leading-snug" style={{ color: "var(--text-on)", letterSpacing: "0.02em" }}>
               {item.title}
             </h1>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-5">
+            <p className="text-sm leading-relaxed mb-5" style={{ color: "var(--text-dim)" }}>
               {item.lead}
             </p>
             <div className="flex justify-center">
@@ -209,51 +213,45 @@ export default async function LpPage({
 
           {/* 選択肢セクション */}
           {item.options.length > 0 && (
-            <section className="py-8 border-t border-zinc-200 dark:border-zinc-700">
-              <h2 className="text-xl font-bold text-zinc-800 dark:text-zinc-100 mb-4">
+            <section className="py-8" style={{ borderTop: "1px solid var(--border)" }}>
+              <h2 className="text-xl font-bold mb-4" style={{ color: "var(--text-on)" }}>
                 {item.optionsHeading ?? "選択肢"}
               </h2>
               {item.optionsIntro && (
-                <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-4">
+                <p className="text-sm leading-relaxed mb-4" style={{ color: "var(--text-dim)" }}>
                   {item.optionsIntro}
                 </p>
               )}
 
-              {/* 選び方の図（menuMap がある場合） */}
               {item.menuMap && item.menuMap.length > 0 && (
-                <div className="my-5 py-4 px-2 bg-white dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-700">
+                <div
+                  className="my-5 py-4 px-2"
+                  style={{ backgroundColor: "var(--bg-surface)", border: "1px solid var(--border)" }}
+                >
                   <MenuMapSvg rows={item.menuMap} />
                 </div>
               )}
 
               {item.optionsAsTable ? (
-                /* 2列表レイアウト（メニュー名＋内容） */
                 <div className="table-scroll">
-                  <table className="w-full text-sm border-collapse border border-zinc-200 dark:border-zinc-700">
+                  <table className="w-full text-sm border-collapse" style={{ border: "1px solid var(--border)" }}>
                     <thead>
-                      <tr className="bg-zinc-100 dark:bg-zinc-800">
-                        <th className="text-left p-3 border border-zinc-200 dark:border-zinc-700 font-semibold text-zinc-700 dark:text-zinc-300 whitespace-nowrap">
+                      <tr>
+                        <th className="text-left p-3 font-semibold whitespace-nowrap" style={{ border: "1px solid var(--border)", color: "var(--text-on)" }}>
                           メニュー
                         </th>
-                        <th className="text-left p-3 border border-zinc-200 dark:border-zinc-700 font-semibold text-zinc-700 dark:text-zinc-300">
+                        <th className="text-left p-3 font-semibold" style={{ border: "1px solid var(--border)", color: "var(--text-on)" }}>
                           内容
                         </th>
                       </tr>
                     </thead>
                     <tbody>
                       {item.options.map((opt, i) => (
-                        <tr
-                          key={i}
-                          className={
-                            i % 2 === 0
-                              ? "bg-white dark:bg-zinc-900"
-                              : "bg-stone-50 dark:bg-zinc-800"
-                          }
-                        >
-                          <td className="p-3 border border-zinc-200 dark:border-zinc-700 font-medium text-zinc-800 dark:text-zinc-100 align-top whitespace-nowrap">
+                        <tr key={i}>
+                          <td className="p-3 font-medium align-top whitespace-nowrap" style={{ border: "1px solid var(--border)", color: "var(--text-on)", backgroundColor: i % 2 === 0 ? "var(--bg-surface)" : "var(--bg-base)" }}>
                             {opt.title}
                           </td>
-                          <td className="p-3 border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 align-top">
+                          <td className="p-3 align-top" style={{ border: "1px solid var(--border)", color: "var(--text-dim)", backgroundColor: i % 2 === 0 ? "var(--bg-surface)" : "var(--bg-base)" }}>
                             {opt.description}
                           </td>
                         </tr>
@@ -262,39 +260,31 @@ export default async function LpPage({
                   </table>
                 </div>
               ) : hasTableOptions ? (
-                /* 3列表レイアウト（when フィールドがある場合） */
                 <div className="table-scroll">
-                  <table className="w-full text-sm border-collapse border border-zinc-200 dark:border-zinc-700">
+                  <table className="w-full text-sm border-collapse" style={{ border: "1px solid var(--border)" }}>
                     <thead>
-                      <tr className="bg-zinc-100 dark:bg-zinc-800">
-                        <th className="text-left p-3 border border-zinc-200 dark:border-zinc-700 font-semibold text-zinc-700 dark:text-zinc-300 whitespace-nowrap">
+                      <tr>
+                        <th className="text-left p-3 font-semibold whitespace-nowrap" style={{ border: "1px solid var(--border)", color: "var(--text-on)" }}>
                           選択肢
                         </th>
-                        <th className="text-left p-3 border border-zinc-200 dark:border-zinc-700 font-semibold text-zinc-700 dark:text-zinc-300">
+                        <th className="text-left p-3 font-semibold" style={{ border: "1px solid var(--border)", color: "var(--text-on)" }}>
                           内容
                         </th>
-                        <th className="text-left p-3 border border-zinc-200 dark:border-zinc-700 font-semibold text-zinc-700 dark:text-zinc-300">
+                        <th className="text-left p-3 font-semibold" style={{ border: "1px solid var(--border)", color: "var(--text-on)" }}>
                           選ぶ場面
                         </th>
                       </tr>
                     </thead>
                     <tbody>
                       {item.options.map((opt, i) => (
-                        <tr
-                          key={i}
-                          className={
-                            opt.highlighted
-                              ? "bg-stone-100 dark:bg-zinc-800"
-                              : "bg-white dark:bg-zinc-900"
-                          }
-                        >
-                          <td className="p-3 border border-zinc-200 dark:border-zinc-700 font-medium text-zinc-800 dark:text-zinc-100 align-top">
+                        <tr key={i}>
+                          <td className="p-3 font-medium align-top" style={{ border: "1px solid var(--border)", color: "var(--text-on)", backgroundColor: i % 2 === 0 ? "var(--bg-surface)" : "var(--bg-base)" }}>
                             {opt.title}
                           </td>
-                          <td className="p-3 border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 align-top">
+                          <td className="p-3 align-top" style={{ border: "1px solid var(--border)", color: "var(--text-dim)", backgroundColor: i % 2 === 0 ? "var(--bg-surface)" : "var(--bg-base)" }}>
                             {opt.description}
                           </td>
-                          <td className="p-3 border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 align-top">
+                          <td className="p-3 align-top" style={{ border: "1px solid var(--border)", color: "var(--text-dim)", backgroundColor: i % 2 === 0 ? "var(--bg-surface)" : "var(--bg-base)" }}>
                             {opt.when}
                           </td>
                         </tr>
@@ -303,17 +293,23 @@ export default async function LpPage({
                   </table>
                 </div>
               ) : (
-                /* カードレイアウト（when フィールドがない場合） */
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {item.options.map((opt, i) => (
                     <div
                       key={i}
-                      className="p-4 border border-zinc-200 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-900"
+                      className="p-4"
+                      style={{
+                        backgroundColor: "var(--bg-surface)",
+                        borderTop: "1px solid var(--border)",
+                        borderRight: "1px solid var(--border)",
+                        borderBottom: "1px solid var(--border)",
+                        borderLeft: "3px solid var(--border)",
+                      }}
                     >
-                      <h3 className="font-semibold text-zinc-800 dark:text-zinc-100 mb-1">
+                      <h3 className="font-semibold mb-1" style={{ color: "var(--text-on)" }}>
                         {opt.title}
                       </h3>
-                      <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                      <p className="text-sm leading-relaxed" style={{ color: "var(--text-dim)" }}>
                         {opt.description}
                       </p>
                     </div>
@@ -321,9 +317,8 @@ export default async function LpPage({
                 </div>
               )}
 
-              {/* 選択肢セクション末尾の注記 */}
               {item.optionsNote && (
-                <p className="mt-4 text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                <p className="mt-4 text-sm leading-relaxed" style={{ color: "var(--text-dim)" }}>
                   {item.optionsNote}
                 </p>
               )}
@@ -332,64 +327,59 @@ export default async function LpPage({
 
           {/* 料金セクション */}
           {item.pricingHeading && (
-            <section className="py-8 border-t border-zinc-200 dark:border-zinc-700">
-              <h2 className="text-xl font-bold text-zinc-800 dark:text-zinc-100 mb-4">
+            <section className="py-8" style={{ borderTop: "1px solid var(--border)" }}>
+              <h2 className="text-xl font-bold mb-4" style={{ color: "var(--text-on)" }}>
                 {item.pricingHeading}
               </h2>
 
-              {/* 料金構成の図（インラインSVG） */}
-              <div className="my-5 py-4 px-2 bg-white dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-700">
+              <div
+                className="my-5 py-4 px-2"
+                style={{ backgroundColor: "var(--bg-surface)", border: "1px solid var(--border)" }}
+              >
                 <svg
                   viewBox="0 0 280 220"
                   className="w-full max-w-[260px] mx-auto block"
                   aria-label="料金構成の図：プラン料金にシーズン料金と土日祝日料金が加算される"
                   role="img"
                 >
-                  {/* プラン料金 */}
                   <rect
-                    x="40" y="14" width="200" height="40" rx="4"
-                    fill="none" stroke="currentColor" strokeWidth="1.5" opacity="0.35"
+                    x="40" y="14" width="200" height="40" rx="2"
+                    fill="none" stroke="currentColor" strokeWidth="1.5" opacity="0.3"
                   />
                   <text x="140" y="38" textAnchor="middle" fontSize="13" fill="currentColor">
                     プラン料金
                   </text>
 
-                  {/* ＋ */}
-                  <text x="140" y="70" textAnchor="middle" fontSize="20" fill="currentColor" opacity="0.4">
+                  <text x="140" y="70" textAnchor="middle" fontSize="20" fill="currentColor" opacity="0.35">
                     ＋
                   </text>
 
-                  {/* シーズン料金 */}
                   <rect
-                    x="40" y="80" width="200" height="40" rx="4"
-                    fill="none" stroke="#f59e0b" strokeWidth="1.5"
+                    x="40" y="80" width="200" height="40" rx="2"
+                    fill="none" stroke="var(--accent)" strokeWidth="1.5"
                   />
                   <text x="140" y="104" textAnchor="middle" fontSize="12" fill="currentColor">
                     シーズン料金（9〜12月）
                   </text>
 
-                  {/* ＋ */}
-                  <text x="140" y="138" textAnchor="middle" fontSize="20" fill="currentColor" opacity="0.4">
+                  <text x="140" y="138" textAnchor="middle" fontSize="20" fill="currentColor" opacity="0.35">
                     ＋
                   </text>
 
-                  {/* 土日祝日料金 */}
                   <rect
-                    x="40" y="148" width="200" height="40" rx="4"
-                    fill="none" stroke="#f59e0b" strokeWidth="1.5"
+                    x="40" y="148" width="200" height="40" rx="2"
+                    fill="none" stroke="var(--accent)" strokeWidth="1.5"
                   />
                   <text x="140" y="172" textAnchor="middle" fontSize="12" fill="currentColor">
                     土日祝日料金（土日祝）
                   </text>
 
-                  {/* 注記 */}
-                  <text x="140" y="210" textAnchor="middle" fontSize="10" fill="currentColor" opacity="0.5">
+                  <text x="140" y="210" textAnchor="middle" fontSize="10" fill="currentColor" opacity="0.45">
                     9〜12月の土日祝は両方加算
                   </text>
                 </svg>
               </div>
 
-              {/* 本文 */}
               {item.pricingBody && (
                 <div className="space-y-3">
                   {item.pricingBody.map((block, i) => (
@@ -401,28 +391,35 @@ export default async function LpPage({
           )}
 
           {/* CTA 2 */}
-          <section className="py-8 border-t border-zinc-200 dark:border-zinc-700 text-center">
+          <section className="py-8 text-center" style={{ borderTop: "1px solid var(--border)" }}>
             <CtaButton href={item.affiliateUrl} label={item.ctaLabel} />
           </section>
 
           {/* 予約の流れ */}
           {item.steps.length > 0 && (
-            <section className="py-8 border-t border-zinc-200 dark:border-zinc-700">
-              <h2 className="text-xl font-bold text-zinc-800 dark:text-zinc-100 mb-5">
+            <section className="py-8" style={{ borderTop: "1px solid var(--border)" }}>
+              <h2 className="text-xl font-bold mb-5" style={{ color: "var(--text-on)" }}>
                 {item.stepsHeading ?? "申込の流れ"}
               </h2>
               <ol className="space-y-4">
                 {item.steps.map((step, i) => (
                   <li key={i} className="flex gap-4">
-                    <span className="flex-shrink-0 w-7 h-7 rounded-full bg-zinc-200 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-300 text-sm font-bold flex items-center justify-center">
+                    <span
+                      className="flex-shrink-0 w-7 h-7 text-sm font-bold flex items-center justify-center"
+                      style={{
+                        backgroundColor: "var(--bg-base)",
+                        border: "1px solid var(--border)",
+                        color: "var(--text-on)",
+                      }}
+                    >
                       {i + 1}
                     </span>
                     <div className="pt-0.5">
-                      <p className="font-semibold text-zinc-800 dark:text-zinc-100 text-sm">
+                      <p className="font-semibold text-sm" style={{ color: "var(--text-on)" }}>
                         {step.title}
                       </p>
                       {step.description && (
-                        <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-0.5">
+                        <p className="text-sm mt-0.5" style={{ color: "var(--text-dim)" }}>
                           {step.description}
                         </p>
                       )}
@@ -430,9 +427,11 @@ export default async function LpPage({
                   </li>
                 ))}
               </ol>
-              {/* 予約の流れセクション末尾の注記 */}
               {item.stepsNote && (
-                <p className="mt-5 text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed border-t border-zinc-100 dark:border-zinc-800 pt-4">
+                <p
+                  className="mt-5 text-sm leading-relaxed pt-4"
+                  style={{ color: "var(--text-dim)", borderTop: "1px solid var(--border)" }}
+                >
                   {item.stepsNote}
                 </p>
               )}
@@ -441,17 +440,20 @@ export default async function LpPage({
 
           {/* Q&A */}
           {item.faqs.length > 0 && (
-            <section className="py-8 border-t border-zinc-200 dark:border-zinc-700">
-              <h2 className="text-xl font-bold text-zinc-800 dark:text-zinc-100 mb-5">
+            <section className="py-8" style={{ borderTop: "1px solid var(--border)" }}>
+              <h2 className="text-xl font-bold mb-5" style={{ color: "var(--text-on)" }}>
                 {item.faqsHeading ?? "よくある質問"}
               </h2>
               <dl className="space-y-5">
                 {item.faqs.map((faq, i) => (
                   <div key={i}>
-                    <dt className="font-semibold text-zinc-800 dark:text-zinc-100 text-sm mb-1">
+                    <dt className="font-semibold text-sm mb-1" style={{ color: "var(--text-on)" }}>
                       Q. {faq.question}
                     </dt>
-                    <dd className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed pl-4 border-l-2 border-zinc-200 dark:border-zinc-700">
+                    <dd
+                      className="text-sm leading-relaxed pl-4"
+                      style={{ color: "var(--text-dim)", borderLeft: "2px solid var(--accent)" }}
+                    >
                       {faq.answer}
                     </dd>
                   </div>
@@ -461,26 +463,25 @@ export default async function LpPage({
           )}
 
           {/* CTA 3 */}
-          <section className="py-8 border-t border-zinc-200 dark:border-zinc-700 text-center">
+          <section className="py-8 text-center" style={{ borderTop: "1px solid var(--border)" }}>
             <CtaButton href={item.affiliateUrl} label={item.ctaLabel} />
           </section>
 
-          {/* 情報確認日と注記 */}
           {item.infoDate && (
-            <p className="pb-8 text-xs text-zinc-400 dark:text-zinc-500 text-center leading-relaxed">
+            <p className="pb-8 text-xs text-center leading-relaxed" style={{ color: "var(--text-dim)", opacity: 0.7 }}>
               このページの内容は、{formatInfoDate(item.infoDate)}時点の公式サイトの情報にもとづいています。料金、空き状況、サービスの内容は変わることがあります。最新の情報は公式サイトでご確認ください。
             </p>
           )}
         </main>
 
         {/* LPフッター */}
-        <footer className="border-t border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900">
+        <footer style={{ borderTop: "1px solid var(--border)", backgroundColor: "var(--bg-surface)" }}>
           <div className="max-w-2xl mx-auto px-4 py-6">
-            <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-3">
+            <p className="text-xs mb-3" style={{ color: "var(--text-dim)" }}>
               本ページはアフィリエイト広告を利用しています。
             </p>
             <nav>
-              <ul className="flex flex-wrap gap-4 text-xs text-zinc-500 dark:text-zinc-400">
+              <ul className="flex flex-wrap gap-4 text-xs" style={{ color: "var(--text-dim)" }}>
                 <li>
                   <Link href="/about/" className="hover:underline">
                     運営者情報
@@ -493,7 +494,7 @@ export default async function LpPage({
                 </li>
               </ul>
             </nav>
-            <p className="mt-4 text-xs text-zinc-400 dark:text-zinc-600">
+            <p className="mt-4 text-xs" style={{ color: "var(--text-dim)", opacity: 0.55 }}>
               &copy; {new Date().getFullYear()} {site.owner}
             </p>
           </div>
