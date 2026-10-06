@@ -36,9 +36,15 @@ export type LpData = {
   articleLinkLabel?: string;    // 記事末尾の導線に使う文言（広告主名を含めない）
   optionsHeading?: string;
   optionsIntro?: string;
+  coachDiagram?: boolean;       // コーチ・親・子の関係図をSVGで表示（選択肢セクション内）
   menuMap?: LpMenuMapRow[];     // 選び方の図（こうしたい→メニュー）のデータ
   optionsAsTable?: boolean;     // trueのとき2列表レイアウト（メニュー＋内容）
+  optionsTableHeaders?: [string, string]; // 2列表の列名（デフォルト: ["メニュー", "内容"]）
   optionsNote?: string;         // 選択肢セクション末尾の注記
+  infoSection?: {               // 追加情報セクション（選択肢の後、CTA2の前）
+    heading: string;
+    body: LpBodyBlock[];
+  };
   pricingHeading?: string;
   pricingBody?: LpBodyBlock[];
   stepsHeading?: string;
@@ -214,6 +220,99 @@ export const lpItems: LpData[] = [
         question: "予約のあとで、日時を変更できますか。",
         answer:
           "予約ページに、予約の変更とキャンセルの案内があります。手続きの方法と期限は、予約ページで確認してください。",
+      },
+    ],
+  },
+  {
+    slug: "english-coach",
+    theme: "english",
+    title: "小学生のオンライン英語、申し込む前に確認しておくこと",
+    lead: "CampusTop は、QQ English が運営する子ども向けのオンライン英語スクールです。レッスンは自宅で1日25分。専属の日本人コーチが付き、レッスンの予約や学習の計画を担当します。入会を考えている家庭は、まず無料の個別相談会で、内容と料金を確認できます。",
+    ctaLabel: "無料個別相談会に申し込む",
+    affiliateUrl: "",         // 承認後に A8.net のアフィリエイトリンクを入力する
+    measurementImageUrl: "",  // 承認後に A8.net の計測用画像 URL を入力する
+    infoDate: "2026-10-06",
+    articleLinkLabel: "コーチが付くオンライン英語スクールの、無料相談の内容を見る",
+    optionsHeading: "親の手間はどこまで減るか。コーチ、親、子どもの分担",
+    optionsIntro:
+      "オンライン英会話が続かなくなる理由のひとつは、レッスンの予約や進み具合の確認が、親の仕事になることです。CampusTop では、その部分を専属の日本人コーチが受け持ちます。",
+    coachDiagram: true,
+    optionsAsTable: true,
+    optionsTableHeaders: ["担当", "すること"],
+    optionsNote:
+      "レッスンのスケジュールは、曜日ごとに設定できます。カリキュラムは、子どもの状況や目標に合わせて調整できます。英語の検定試験の対策にも対応しています。",
+    infoSection: {
+      heading: "無料個別相談会で確認できること",
+      body: [
+        {
+          type: "ul",
+          items: [
+            "子どもの今の英語レベル",
+            "レベルと目標に合わせた学習プランの提案",
+            "レッスンの進め方とカリキュラム",
+            "料金プランと支払い方法",
+          ],
+        },
+        {
+          type: "p",
+          text: "広告主のページには、相談会のあとに入会する必要はないと明記されています。内容と料金を聞いたうえで、家庭で検討できます。",
+        },
+      ],
+    },
+    stepsHeading: "申込から相談会までの流れ",
+    stepsNote:
+      "申込フォームは、リンク先のページの下の方にあります。フォームの「その他ご質問など」の欄に、連絡を受けやすい曜日と時間を書いておくと、日程を決めやすくなります。",
+    faqsHeading: "申し込む前によくある疑問",
+    options: [
+      {
+        title: "専属コーチ",
+        description:
+          "学習プランを設計する／レッスンの予約を代行する／月1回、オンラインで面談する／毎日のレッスン内容を確認して、フィードバックする／LINEで学習の相談を受ける",
+      },
+      {
+        title: "親",
+        description:
+          "相談会で、子どもの学習経験と目標を伝える／月1回の面談で、家庭での様子を共有する",
+      },
+      {
+        title: "子ども",
+        description: "自宅で1日25分のレッスンを受ける",
+      },
+    ],
+    steps: [
+      {
+        title: "申込フォームに入力する",
+        description: "必須は、お子様のお名前、電話番号、メールアドレスの3つ",
+      },
+      { title: "相談会の日程を決める", description: "" },
+      { title: "無料個別相談会に参加する", description: "" },
+      { title: "家庭で検討する", description: "" },
+    ],
+    faqs: [
+      {
+        question: "料金はいくらですか。",
+        answer:
+          "月額固定の料金制です。金額と支払い方法は、無料個別相談会で案内されます。",
+      },
+      {
+        question: "相談会のあと、入会しないといけませんか。",
+        answer:
+          "入会する必要はありません。検討したうえで、希望する場合に申し込む形です。",
+      },
+      {
+        question: "相談会の前に、準備することはありますか。",
+        answer:
+          "特別な準備は要りません。子どものこれまでの英語の学習経験と、目標を考えておくと、話が進めやすくなります。",
+      },
+      {
+        question: "講師はどんな人ですか。",
+        answer:
+          "フィリピン人の教師が、毎日のレッスンを担当します。学習の計画や相談は、日本人のコーチが担当します。",
+      },
+      {
+        question: "習い事や学校の予定と両立できますか。",
+        answer:
+          "レッスンのスケジュールは、曜日ごとに設定できます。予約はコーチが代行します。",
       },
     ],
   },

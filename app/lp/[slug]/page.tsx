@@ -67,6 +67,33 @@ function formatInfoDate(iso: string) {
   return `${parts[0]}年${parts[1]}月${parts[2]}日`;
 }
 
+function CoachDiagramSvg() {
+  return (
+    <svg
+      viewBox="0 0 280 128"
+      className="w-full max-w-[240px] mx-auto block"
+      role="img"
+      aria-label="コーチが中央で、子どものレッスンと親の両方を担当している関係図"
+    >
+      {/* 専属コーチ（中央上） */}
+      <rect x="90" y="8" width="100" height="38" rx="2"
+        fill="var(--accent)" fillOpacity="0.08" stroke="var(--accent)" strokeWidth="1.5" />
+      <text x="140" y="31" textAnchor="middle" fontSize="12" fill="currentColor">専属コーチ</text>
+      {/* コーチから子ども・親への接続線 */}
+      <line x1="140" y1="46" x2="56" y2="78" stroke="currentColor" strokeWidth="1.2" opacity="0.35" />
+      <line x1="140" y1="46" x2="224" y2="78" stroke="currentColor" strokeWidth="1.2" opacity="0.35" />
+      {/* 子ども（左下） */}
+      <rect x="12" y="78" width="88" height="38" rx="2"
+        fill="none" stroke="currentColor" strokeWidth="1.2" opacity="0.4" />
+      <text x="56" y="101" textAnchor="middle" fontSize="12" fill="currentColor">子ども</text>
+      {/* 親（右下） */}
+      <rect x="180" y="78" width="88" height="38" rx="2"
+        fill="none" stroke="currentColor" strokeWidth="1.2" opacity="0.4" />
+      <text x="224" y="101" textAnchor="middle" fontSize="12" fill="currentColor">親</text>
+    </svg>
+  );
+}
+
 function MenuMapSvg({ rows }: { rows: LpMenuMapRow[] }) {
   const GAP = 14;
   const BASE_H = 54;
@@ -223,6 +250,12 @@ export default async function LpPage({
                 </p>
               )}
 
+              {item.coachDiagram && (
+                <div className="my-5 py-4 px-2" style={{ backgroundColor: "var(--bg-surface)", border: "1px solid var(--border)" }}>
+                  <CoachDiagramSvg />
+                </div>
+              )}
+
               {item.menuMap && item.menuMap.length > 0 && (
                 <div
                   className="my-5 py-4 px-2"
@@ -238,10 +271,10 @@ export default async function LpPage({
                     <thead>
                       <tr>
                         <th className="text-left p-3 font-semibold whitespace-nowrap" style={{ border: "1px solid var(--border)", color: "var(--text-on)" }}>
-                          メニュー
+                          {item.optionsTableHeaders?.[0] ?? "メニュー"}
                         </th>
                         <th className="text-left p-3 font-semibold" style={{ border: "1px solid var(--border)", color: "var(--text-on)" }}>
-                          内容
+                          {item.optionsTableHeaders?.[1] ?? "内容"}
                         </th>
                       </tr>
                     </thead>
@@ -387,6 +420,20 @@ export default async function LpPage({
                   ))}
                 </div>
               )}
+            </section>
+          )}
+
+          {/* 追加情報セクション */}
+          {item.infoSection && (
+            <section className="py-8" style={{ borderTop: "1px solid var(--border)" }}>
+              <h2 className="text-xl font-bold mb-4" style={{ color: "var(--text-on)" }}>
+                {item.infoSection.heading}
+              </h2>
+              <div className="space-y-3">
+                {item.infoSection.body.map((block, i) => (
+                  <BodyBlock key={i} block={block} index={i} />
+                ))}
+              </div>
             </section>
           )}
 
