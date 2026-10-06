@@ -6,7 +6,9 @@ import { lpItems } from "@/content/lp";
 
 const article = getArticle("plan")!;
 
-const publishedLps = lpItems.filter((l) => l.affiliateUrl !== "" && l.articleLinkLabel);
+const publishedLps = lpItems.filter(
+  (l) => l.theme === "photo" && l.affiliateUrl !== "" && l.articleLinkLabel
+);
 
 export const metadata: Metadata = {
   title: article.title,

@@ -15,9 +15,7 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  const photoArticles = articles.filter(
-    (a) => a.category === "kosodate" && a.theme === "photo"
-  );
+  const kosodateArticles = articles.filter((a) => a.category === "kosodate");
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-10">
@@ -27,7 +25,7 @@ export default function HomePage() {
           子育ての節目を、記録に残す
         </h1>
         <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-prose">
-          {site.name}は、お宮参り・七五三・入園入学など子育ての節目にまつわる情報をまとめた情報サイトです。フォトスタジオの選び方や料金の仕組みなど、実際に動く前に知っておきたいことを、落ち着いた調子でお伝えします。
+          {site.name}は、お宮参り・七五三・入園入学など子育ての節目にまつわる情報をまとめた情報サイトです。記念写真や子どもの英語など、実際に動く前に知っておきたいことを、落ち着いた調子でお伝えします。
         </p>
       </section>
 
@@ -42,18 +40,18 @@ export default function HomePage() {
         >
           <span className="font-semibold text-zinc-800 dark:text-zinc-100">子育て</span>
           <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
-            記念写真・ランドセル・習い事など、子育ての節目にまつわる情報
+            記念写真や子どもの英語など、子育ての節目にまつわる情報
           </p>
         </Link>
       </section>
 
-      {/* Recent articles */}
+      {/* Articles */}
       <section>
         <h2 className="text-lg font-semibold text-zinc-700 dark:text-zinc-300 mb-4 pb-2 border-b border-zinc-200 dark:border-zinc-700">
           記事
         </h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {photoArticles.map((article) => (
+          {kosodateArticles.map((article) => (
             <ArticleCard key={article.slug} article={article} />
           ))}
         </div>

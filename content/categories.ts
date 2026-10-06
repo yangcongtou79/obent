@@ -16,7 +16,7 @@ export const categories: Category[] = [
     slug: "kosodate",
     title: "子育て",
     description:
-      "お宮参り・誕生日・七五三・入園入学など、子育ての節目を記録するための情報をまとめています。",
+      "お宮参り・誕生日・七五三・入園入学など、子育ての節目にまつわる情報をまとめています。",
   },
 ];
 
@@ -27,6 +27,13 @@ export const themes: Theme[] = [
     title: "記念写真",
     description:
       "フォトスタジオの選び方から料金の仕組み、撮影当日の流れまで、記念写真にまつわる情報をまとめています。",
+  },
+  {
+    slug: "english",
+    categorySlug: "kosodate",
+    title: "子どもの英語",
+    description:
+      "小学校での英語学習の仕組みや、教室・オンラインの選び方など、子どもの英語にまつわる情報をまとめています。",
   },
 ];
 

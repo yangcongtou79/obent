@@ -6,9 +6,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const base = site.url;
 
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: `${base}/`, lastModified: "2026-10-04", changeFrequency: "weekly", priority: 1.0 },
-    { url: `${base}/kosodate/`, lastModified: "2026-10-04", changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/`, lastModified: "2026-10-06", changeFrequency: "weekly", priority: 1.0 },
+    { url: `${base}/kosodate/`, lastModified: "2026-10-06", changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/kosodate/photo/`, lastModified: "2026-10-04", changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/kosodate/english/`, lastModified: "2026-10-06", changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/about/`, lastModified: "2026-10-04", changeFrequency: "yearly", priority: 0.3 },
     { url: `${base}/privacy/`, lastModified: "2026-10-04", changeFrequency: "yearly", priority: 0.3 },
   ];

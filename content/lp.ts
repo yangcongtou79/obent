@@ -26,13 +26,14 @@ export type LpBodyBlock =
 
 export type LpData = {
   slug: string;
+  theme: string;                // 記事からの導線を絞るためのテーマ識別子
   title: string;
   lead: string;
   ctaLabel: string;
   affiliateUrl: string;         // 空文字のままではページを生成しない
   measurementImageUrl?: string; // A8.net 計測用画像 URL（1×1px img）
   infoDate?: string;            // 情報確認日（ISO形式 YYYY-MM-DD）
-  articleLinkLabel?: string;    // 記事3の導線に使う文言（広告主名を含めない）
+  articleLinkLabel?: string;    // 記事末尾の導線に使う文言（広告主名を含めない）
   optionsHeading?: string;
   optionsIntro?: string;
   menuMap?: LpMenuMapRow[];     // 選び方の図（こうしたい→メニュー）のデータ
@@ -51,6 +52,7 @@ export type LpData = {
 export const lpItems: LpData[] = [
   {
     slug: "photo-studio",
+    theme: "photo",
     title: "七五三の撮影予約の前に確認しておくこと",
     lead: "スタジオキャラットのWEB予約は、24時間受け付けています。予約フォームは4つのステップで進みます。このページでは、最初の画面で迷いやすい選択肢と、予約の前に知っておきたい料金の仕組みを整理しました。",
     ctaLabel: "WEBで撮影を予約する",
@@ -136,6 +138,7 @@ export const lpItems: LpData[] = [
   },
   {
     slug: "photo-tokai",
+    theme: "photo",
     title: "七五三の撮影プランの選び方（愛知・岐阜・三重）",
     lead: "フォトスタジオタートルは、愛知・岐阜・三重に店舗があるフォトスタジオです。WEB予約では、最初に撮影メニューを選びます。七五三のメニューは4種類あります。このページでは、4種類の違いと、予約の流れを整理しました。",
     ctaLabel: "WEBで予約する",

@@ -39,6 +39,36 @@ export const articles: Article[] = [
     publishedAt: "2026-10-04",
     updatedAt: "2026-10-04",
   },
+  {
+    slug: "school",
+    category: "kosodate",
+    theme: "english",
+    title: "小学校の英語は、何年生で何を学ぶか",
+    description:
+      "3・4年生の外国語活動と5・6年生の教科としての英語の違いを、授業時数と学習内容から整理しました。",
+    publishedAt: "2026-10-06",
+    updatedAt: "2026-10-06",
+  },
+  {
+    slug: "compare",
+    category: "kosodate",
+    theme: "english",
+    title: "通学の教室とオンライン英会話の違い",
+    description:
+      "送迎・時間割・学習形式・親の関わりなど、通学とオンラインの特徴を比較しました。",
+    publishedAt: "2026-10-06",
+    updatedAt: "2026-10-06",
+  },
+  {
+    slug: "consultation",
+    category: "kosodate",
+    theme: "english",
+    title: "オンライン英会話の無料相談で確認すること",
+    description:
+      "入会前の無料相談や体験で確認しておきたい項目と、家庭側の準備をまとめました。",
+    publishedAt: "2026-10-06",
+    updatedAt: "2026-10-06",
+  },
 ];
 
 export function getArticlesByTheme(
