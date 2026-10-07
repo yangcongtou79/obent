@@ -226,12 +226,12 @@ export const lpItems: LpData[] = [
   {
     slug: "english-coach",
     theme: "english",
-    title: "小学生のオンライン英語、申し込む前に確認しておくこと",
-    lead: "CampusTop は、QQ English が運営する子ども向けのオンライン英語スクールです。レッスンは自宅で1日25分。専属の日本人コーチが付き、レッスンの予約や学習の計画を担当します。入会を考えている家庭は、まず無料の個別相談会で、内容と料金を確認できます。",
-    ctaLabel: "無料個別相談会に申し込む",
+    title: "オンライン英会話の予約と学習管理を、コーチに任せる仕組み",
+    lead: "専属コーチがレッスンの予約と学習管理を担当するオンライン英会話スクール「CampusTop」の無料個別相談会について。申込フォームの必須入力は3項目。相談会のあとに入会する必要はありません。",
+    ctaLabel: "無料個別相談会の申込ページへ",
     affiliateUrl: "https://px.a8.net/svt/ejp?a8mat=4BE8KV+5CWIBM+4HHM+ZPKV6&a8ejpredirect=https%3A%2F%2Fwww.qqeng.com%2Flp%2Fjpcampustop_affiliate%2F",
     measurementImageUrl: "https://www12.a8.net/0.gif?a8mat=4BE8KV+5CWIBM+4HHM+ZPKV6",
-    infoDate: "2026-10-06",
+    infoDate: "2026-10-07",
     articleLinkLabel: "コーチが付くオンライン英語スクールの、無料相談の内容を見る",
     optionsHeading: "親の手間はどこまで減るか。コーチ、親、子どもの分担",
     optionsIntro:

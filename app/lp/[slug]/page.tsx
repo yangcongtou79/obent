@@ -6,6 +6,7 @@ import { site } from "@/lib/site";
 import PrLabel from "@/components/PrLabel";
 import MetaPixel from "@/components/MetaPixel";
 import CtaButton from "@/components/CtaButton";
+import LpEnglishCoach from "@/components/LpEnglishCoach";
 
 export const dynamicParams = false;
 
@@ -195,6 +196,10 @@ export default async function LpPage({
   const { slug } = await params;
   const item = lpItems.find((l) => l.slug === slug && l.affiliateUrl !== "");
   if (!item) notFound();
+
+  if (item.slug === "english-coach") {
+    return <LpEnglishCoach item={item} />;
+  }
 
   const hasTableOptions = item.options.some((o) => o.when !== undefined);
 
