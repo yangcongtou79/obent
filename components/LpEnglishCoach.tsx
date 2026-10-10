@@ -29,26 +29,28 @@ function LpImage({
   className?: string;
 }) {
   return (
-    <div
-      className={`relative rounded-sm overflow-hidden${className ? ` ${className}` : ""}`}
-      style={{ border: "1px solid var(--border)" }}
-    >
-      <Image
-        src={src}
-        alt={alt}
-        width={width}
-        height={height}
-        className="w-full h-auto block"
-        sizes="(min-width: 672px) 640px, 100vw"
-        priority={priority}
-      />
-      <span
-        className="absolute bottom-0 right-0 text-[11px] px-1.5 py-0.5"
-        style={{ color: "#ffffff", backgroundColor: "rgba(0,0,0,0.45)" }}
+    <figure className={className}>
+      <div
+        className="rounded-sm overflow-hidden"
+        style={{ border: "1px solid var(--border)" }}
       >
-        {note}
-      </span>
-    </div>
+        <Image
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+          className="w-full h-auto block"
+          sizes="(min-width: 672px) 640px, 100vw"
+          priority={priority}
+        />
+      </div>
+      <figcaption
+        className="text-[11px] text-right mt-1"
+        style={{ color: "var(--text-dim)" }}
+      >
+        ※{note}
+      </figcaption>
+    </figure>
   );
 }
 
