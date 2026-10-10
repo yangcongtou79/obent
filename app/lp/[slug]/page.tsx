@@ -7,6 +7,7 @@ import PrLabel from "@/components/PrLabel";
 import MetaPixel from "@/components/MetaPixel";
 import CtaButton from "@/components/CtaButton";
 import LpEnglishCoach from "@/components/LpEnglishCoach";
+import LpKidsEnglishCompare from "@/components/LpKidsEnglishCompare";
 
 export const dynamicParams = false;
 
@@ -199,6 +200,10 @@ export default async function LpPage({
 
   if (item.slug === "english-coach") {
     return <LpEnglishCoach item={item} />;
+  }
+
+  if (item.slug === "kids-english-compare") {
+    return <LpKidsEnglishCompare item={item} />;
   }
 
   const hasTableOptions = item.options.some((o) => o.when !== undefined);

@@ -316,4 +316,17 @@ export const lpItems: LpData[] = [
       },
     ],
   },
+  {
+    slug: "kids-english-compare",
+    theme: "english",
+    title: "小学生のオンライン英語スクール3校を、目的別に比べました",
+    lead: "オンラインの英語スクールは、送迎がいらない一方で、何を基準に選べばよいか分かりにくい習い事です。このページでは、子ども向けのオンライン英語スクール3校を、対象年齢、講師、レッスン時間、親のサポート、料金、無料で試せることの6つの項目で比べました。3校は得意なことが違います。下の早見表で、家庭の目的に近いものから確認してください。",
+    ctaLabel: "CampusTopの無料個別相談会を見る",
+    affiliateUrl: "https://px.a8.net/svt/ejp?a8mat=4BE8KV+5CWIBM+4HHM+ZPKV6&a8ejpredirect=https%3A%2F%2Fwww.qqeng.com%2Flp%2Fjpcampustop_affiliate%2F",
+    measurementImageUrl: "https://www12.a8.net/0.gif?a8mat=4BE8KV+5CWIBM+4HHM+ZPKV6",
+    infoDate: "2026-10-10",
+    options: [],
+    steps: [],
+    faqs: [],
+  },
 ];
