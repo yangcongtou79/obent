@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/lib/site";
 import { type LpData } from "@/content/lp";
@@ -8,6 +9,47 @@ import CtaButtonWide from "@/components/CtaButtonWide";
 function formatInfoDate(iso: string) {
   const [y, m, d] = iso.split("-");
   return `${y}年${parseInt(m, 10)}月${parseInt(d, 10)}日`;
+}
+
+function LpImage({
+  src,
+  alt,
+  width,
+  height,
+  note,
+  priority,
+  className,
+}: {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  note: string;
+  priority?: boolean;
+  className?: string;
+}) {
+  return (
+    <div
+      className={`relative rounded-sm overflow-hidden${className ? ` ${className}` : ""}`}
+      style={{ border: "1px solid var(--border)" }}
+    >
+      <Image
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        className="w-full h-auto block"
+        sizes="(min-width: 672px) 640px, 100vw"
+        priority={priority}
+      />
+      <span
+        className="absolute bottom-0 right-0 text-[11px] px-1.5 py-0.5"
+        style={{ color: "#ffffff", backgroundColor: "rgba(0,0,0,0.45)" }}
+      >
+        {note}
+      </span>
+    </div>
+  );
 }
 
 const DAYS = ["月", "火", "水", "木", "金"];
@@ -93,25 +135,25 @@ function PhoneMockupSvg() {
 }
 
 const COMPARISON_ROWS = [
-  { label: "レッスンの予約", typeA: "保護者または子どもが行う", typeB: "コーチが代行する" },
-  { label: "学習計画の作成", typeA: "家庭で考える", typeB: "コーチが設計する" },
-  { label: "進み具合の確認", typeA: "家庭で行う", typeB: "コーチが確認・報告する" },
-  { label: "担当者との面談", typeA: "なし", typeB: "月1回（日本語）" },
-  { label: "問い合わせ言語", typeA: "サービスによる", typeB: "日本語" },
+  { label: "レッスンの予約", typeA: "家庭で予約する", typeB: "コーチが代行する" },
+  { label: "学習の計画", typeA: "家庭で決める", typeB: "コーチが設計する" },
+  { label: "進み具合の確認", typeA: "家庭で把握する", typeB: "コーチが確認し、月1回の面談で共有する" },
+  { label: "相談の相手", typeA: "サービスによって異なる", typeB: "専属のコーチ（LINEで相談できる）" },
+  { label: "合う家庭", typeA: "自分たちのペースで進めたい", typeB: "予約と管理を任せたい" },
 ];
 
 const WORK_CARDS = [
   {
-    title: "レッスンの予約と変更",
-    body: "空き枠を探して子どもの都合と照らし合わせ、予約を入れます。予定が変わったときは変更の手続きが必要です。",
+    title: "レッスンの予約",
+    body: "予約を取り忘れて、レッスンのない日が続く",
   },
   {
-    title: "学習の計画と確認",
-    body: "いつ、何を、どのくらいのペースで進めるかを決めます。進み具合を見て調整することもあります。",
+    title: "進み具合の確認",
+    body: "何をどこまで学んだのか、親が把握できていない",
   },
   {
-    title: "子どものモチベーション管理",
-    body: "飽きたとき、つまずいたとき、続ける意欲が落ちたとき、声をかけて次のレッスンにつなげます。",
+    title: "困ったときの相談",
+    body: "子どもが嫌がったときに、相談できる相手がいない",
   },
 ];
 
@@ -140,15 +182,16 @@ const STATS = [
 ];
 
 const FITS_FAMILIES = [
-  "子どもの英語学習に取り組みたいが、予約や管理に手をかける時間が取りにくい",
-  "週に数回、継続的に受けさせたい",
-  "学習の進み具合を定期的に確認してもらいたい",
+  "平日の送迎の時間が取れない",
+  "予約や進み具合の確認を、任せたい",
+  "学習の計画を相談できる相手がほしい",
+  "毎日少しずつ続けさせたい",
 ];
 
 const CHECK_FAMILIES = [
-  "月々の費用の上限をあらかじめ決めている",
-  "子どもが英語に苦手意識を持っている",
-  "英語の検定試験の対策を主な目的にしたい",
+  "週1回だけ受けたい（毎日のレッスンを基本にしたスクールです）",
+  "友達と一緒に、教室で学ばせたい（レッスンは自宅で、マンツーマンです）",
+  "料金を最優先で決めたい（金額は相談会で案内されます）",
 ];
 
 const UNKNOWNS = [
@@ -230,15 +273,26 @@ export default function LpEnglishCoach({ item }: { item: LpData }) {
           <div className="max-w-2xl mx-auto px-4">
 
             {/* Section 2: ファーストビュー */}
-            <section className="pt-6 pb-9">
+            {/* pt-4（step 1）、h1 mb-4（step 2）、space-y-3 + mb-6（step 3）、写真 mb-4（step 4）を適用 */}
+            <section className="pt-4 pb-9">
+              {/* ① ファーストビュー写真 */}
+              <LpImage
+                src="/images/lp/english-coach-hero.jpg"
+                alt="ヘッドセットを着けて、ノートパソコンでオンラインのレッスンを受ける子ども"
+                width={1280}
+                height={534}
+                note="写真はイメージです"
+                priority
+                className="mb-4"
+              />
               <p className="text-xs mb-2" style={{ color: "var(--text-dim)" }}>小学生の保護者向け</p>
               <h1
-                className="text-2xl font-bold mb-6 leading-snug"
+                className="text-2xl font-bold mb-4 leading-snug"
                 style={{ color: "var(--text-on)", letterSpacing: "0.01em" }}
               >
                 オンライン英会話の予約と学習管理を、専属コーチに任せる仕組み
               </h1>
-              <ul className="space-y-4 mb-8">
+              <ul className="space-y-3 mb-6">
                 {[
                   "レッスンの予約は、コーチが代行",
                   "自宅で1日25分。送迎は不要",
@@ -277,9 +331,18 @@ export default function LpEnglishCoach({ item }: { item: LpData }) {
               <h2 className="text-xl font-bold mb-3" style={{ color: "var(--text-on)" }}>
                 オンライン英会話で、家庭の側に残りやすい作業
               </h2>
-              <p className="text-base mb-6" style={{ color: "var(--text-on)" }}>
-                スクールによっては、次のような作業が家庭の担当になります。
+              <p className="text-base mb-4" style={{ color: "var(--text-on)" }}>
+                オンライン英会話は送迎が要らない一方で、次のような作業が家庭の側に残ることがあります。始めたあとに、こうした状況が起きやすくなります。
               </p>
+              {/* ② 家庭に残る作業の写真 */}
+              <LpImage
+                src="/images/lp/english-coach-parent.jpg"
+                alt="スマートフォンを手に、考えごとをしている女性"
+                width={1280}
+                height={720}
+                note="写真はイメージです"
+                className="mb-4"
+              />
               <div className="space-y-3">
                 {WORK_CARDS.map((card, i) => (
                   <div
@@ -293,7 +356,7 @@ export default function LpEnglishCoach({ item }: { item: LpData }) {
                 ))}
               </div>
               <p className="mt-5 text-base" style={{ color: "var(--text-on)" }}>
-                これらを家庭だけで回すか、スクール側がサポートするかで、負担の分布が変わります。
+                続くかどうかは、子どものやる気だけでなく、この3つを誰が受け持つかにも左右されます。
               </p>
             </section>
 
@@ -303,20 +366,20 @@ export default function LpEnglishCoach({ item }: { item: LpData }) {
                 オンライン英会話には、2つの型があります
               </h2>
               <p className="text-base mb-6" style={{ color: "var(--text-on)" }}>
-                受講の仕組みは、大きく2つに分かれます。
+                どちらが優れているかではなく、家庭の事情によって合う方が変わります。
               </p>
               <div className="grid grid-cols-2 gap-2 mb-2">
                 <div
                   className="px-2 py-2.5 text-xs font-semibold text-center"
                   style={{ backgroundColor: "var(--bg-surface)", border: "1px solid var(--border)", color: "var(--text-dim)" }}
                 >
-                  自分で管理する型
+                  自分で進める型
                 </div>
                 <div
                   className="px-2 py-2.5 text-xs font-semibold text-center"
                   style={{ backgroundColor: "var(--bg-surface)", border: "2px solid var(--accent)", color: "var(--accent)" }}
                 >
-                  コーチが管理する型
+                  コーチが付く型
                   <span className="block text-xs font-normal mt-0.5" style={{ opacity: 0.85 }}>
                     CampusTop はこちら
                   </span>
@@ -343,9 +406,6 @@ export default function LpEnglishCoach({ item }: { item: LpData }) {
                   </div>
                 ))}
               </div>
-              <p className="mt-4 text-sm" style={{ color: "var(--text-dim)" }}>
-                どちらの型が合うかは、家庭の状況と目的によります。
-              </p>
             </section>
 
             {/* Section 6: CampusTop の仕組み */}
@@ -353,9 +413,18 @@ export default function LpEnglishCoach({ item }: { item: LpData }) {
               <h2 className="text-xl font-bold mb-3" style={{ color: "var(--text-on)" }}>
                 CampusTop では、専属コーチが受け持ちます
               </h2>
-              <p className="text-base mb-7" style={{ color: "var(--text-on)" }}>
+              <p className="text-base mb-4" style={{ color: "var(--text-on)" }}>
                 入会すると、担当の日本人コーチが付きます。コーチは次のことを受け持ちます。
               </p>
+              {/* ③ コーチの写真 */}
+              <LpImage
+                src="/images/lp/english-coach-coach.jpg"
+                alt="自宅でノートパソコンに向かい、オンラインで話す女性"
+                width={782}
+                height={440}
+                note="写真はイメージです。実際のコーチではありません。"
+                className="mb-6"
+              />
               <div className="space-y-5">
                 {COACH_BLOCKS.map((block) => (
                   <div key={block.num} className="flex gap-4">
@@ -393,9 +462,18 @@ export default function LpEnglishCoach({ item }: { item: LpData }) {
 
             {/* Section 8: 合う家庭と確認しておきたい家庭 */}
             <section className="py-8" style={{ borderTop: "1px solid var(--border)" }}>
-              <h2 className="text-xl font-bold mb-6" style={{ color: "var(--text-on)" }}>
+              <h2 className="text-xl font-bold mb-4" style={{ color: "var(--text-on)" }}>
                 合う家庭と、相談会で確認しておきたい家庭
               </h2>
+              {/* ④ 相談のイメージ写真 */}
+              <LpImage
+                src="/images/lp/english-coach-consultation.jpg"
+                alt="タブレットに向かって手を振る子どもと、隣で見守る両親"
+                width={1280}
+                height={720}
+                note="写真はイメージです"
+                className="mb-5"
+              />
               <div className="space-y-4">
                 <div
                   className="p-5"
@@ -456,7 +534,7 @@ export default function LpEnglishCoach({ item }: { item: LpData }) {
           {/* Sections 10–14 */}
           <div className="max-w-2xl mx-auto px-4">
 
-            {/* Section 10: 無料個別相談会ですること */}
+            {/* Section 10: 無料個別相談会ですること（写真なし） */}
             <section className="py-8" style={{ borderTop: "1px solid var(--border)" }}>
               <h2 className="text-xl font-bold mb-6" style={{ color: "var(--text-on)" }}>
                 無料個別相談会ですること
